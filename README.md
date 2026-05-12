@@ -188,4 +188,4 @@ The analysis identified several important drivers of customer churn, including c
 
 The preprocessing pipeline successfully transformed the dataset into a machine-learning-ready format while preserving important business information and addressing class imbalance challenges.
 
-These insights and engineered datasets provide a strong foundation for developing predictive machine learning models capable of identifying high-risk customers and supporting proactive retention strategies.
+These insights and engineered datasets provide a strong foundation for developing predictive machine learning models capable of identifying high-risk customers and supporting proactive retention strategies
