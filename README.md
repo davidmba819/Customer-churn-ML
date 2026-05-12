@@ -21,9 +21,15 @@ Understanding why customers leave helps companies improve retention strategies a
 
 # Project Objective
 
-The goal of this project is to analyze telecom customer behavior and identify the major factors associated with customer churn using exploratory data analysis (EDA).
+The goal of this project is to analyze telecom customer behavior, identify key churn drivers, and prepare a machine-learning-ready dataset for predictive modeling.
 
-The insights generated from this analysis will later support the development of a machine learning churn prediction model.
+The project combines:
+- exploratory data analysis (EDA),
+- feature engineering,
+- preprocessing,
+- and machine learning techniques
+
+to support churn prediction and customer retention strategies.
 
 ---
 
@@ -116,14 +122,30 @@ The analysis indicates that customer churn is influenced by multiple behavioral,
 
 ---
 
-# Key Business Insights
+# Feature Engineering & Preprocessing
 
-- Early-stage customers are the most vulnerable to churn.
-- High-paying customers may leave when service expectations are not met.
-- Long-term contracts improve customer stability.
-- Technical support and security services improve retention.
-- Customers integrated into multiple services tend to exhibit lower churn behavior.
-- Automatic payment methods are associated with lower churn risk.
+The dataset was transformed into a machine-learning-ready format through several preprocessing steps:
+
+### Preprocessing Steps
+- Feature and target separation
+- Binary feature encoding
+- One-hot encoding of categorical variables
+- Train-test splitting using stratified sampling
+- Feature scaling using `RobustScaler`
+- Class imbalance handling using `SMOTE`
+
+### Additional Engineering Decisions
+- `customerid` was removed due to lack of predictive value.
+- Outlier analysis was performed without aggressive removal to preserve valid high-value customers.
+- Both baseline and SMOTE-balanced training datasets were retained for model comparison.
+
+### Final Prepared Datasets
+- `X_train`
+- `X_test`
+- `y_train`
+- `y_test`
+- `X_train_smote`
+- `y_train_smote`
 
 ---
 
@@ -134,6 +156,8 @@ The analysis indicates that customer churn is influenced by multiple behavioral,
 - NumPy
 - Matplotlib
 - Seaborn
+- Scikit-learn
+- Imbalanced-learn (SMOTE)
 - Phik
 - Jupyter Notebook
 
@@ -145,31 +169,23 @@ The analysis indicates that customer churn is influenced by multiple behavioral,
 Customer-churn-ML/
 │
 ├── data/
-│   └── telco_churn.csv
+│   ├── raw/
+│   └── processed/
 │
 ├── notebooks/
-│   └── EDA.ipynb
+│   ├── EDA.ipynb
+│   └── Feature_Engineering.ipynb
 │
 ├── README.md
 ├── metadata.md
 ├── LICENSE
 └── .gitignore
-```
 
 ---
-
-# Current Project Status
-
-✅ Data cleaning completed  
-✅ Exploratory data analysis completed  
-✅ Correlation analysis completed  
-
-🚧 Feature engineering and machine learning phases are currently in progress.
-
----
-
 # Conclusion
 
-The exploratory analysis successfully identified several key factors associated with customer churn, including customer tenure, pricing structure, contract type, billing behavior, and support-related services.
+The analysis identified several important drivers of customer churn, including customer tenure, pricing structure, contract type, billing behavior, and support-related services.
 
-The insights from this phase provide a strong foundation for building future machine learning models capable of identifying high-risk customers and supporting proactive retention strategies.
+The preprocessing pipeline successfully transformed the dataset into a machine-learning-ready format while preserving important business information and addressing class imbalance challenges.
+
+These insights and engineered datasets provide a strong foundation for developing predictive machine learning models capable of identifying high-risk customers and supporting proactive retention strategies.
