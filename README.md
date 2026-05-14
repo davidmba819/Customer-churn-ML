@@ -1,155 +1,221 @@
-# Customer Churn Prediction for Telecom
+# Customer Churn Prediction Using Machine Learning
 
-## Business Context
+## Project Overview
 
-Telecommunication companies operate in a highly competitive market where customer retention is critical to sustaining revenue and growth. Acquiring new customers is often more expensive than retaining existing ones, making it essential for companies to understand customer behavior and proactively reduce churn.
+This project focuses on predicting customer churn for a telecommunications company using Machine Learning techniques. The goal is to identify customers who are likely to discontinue their services so that the company can take proactive retention measures.
+
+The project covers a complete end-to-end machine learning workflow including:
+
+- Data Cleaning
+- Exploratory Data Analysis (EDA)
+- Feature Engineering
+- Handling Imbalanced Data using SMOTE
+- Model Building
+- Model Evaluation
+- Hyperparameter Tuning
+- Feature Importance Analysis
+- Business Insights & Recommendations
+
+The final selected model was:
+
+**Gradient Boosting (SMOTE)**
 
 ---
 
-# Problem Statement
+# Business Problem
 
-Customer churn refers to customers who stop using a company’s service or switch to a competitor due to factors such as pricing, poor customer experience, service dissatisfaction, or better alternatives.
+Customer churn is a major challenge in the telecommunications industry because acquiring new customers is often more expensive than retaining existing ones.
 
-In the telecom industry, customer churn directly affects:
-- revenue generation,
-- customer lifetime value,
-- and long-term business stability.
-
-Understanding why customers leave helps companies improve retention strategies and customer satisfaction.
-
----
-
-# Project Objective
-
-The goal of this project is to analyze telecom customer behavior, identify key churn drivers, and prepare a machine-learning-ready dataset for predictive modeling.
-
-The project combines:
-- exploratory data analysis (EDA),
-- feature engineering,
-- preprocessing,
-- and machine learning techniques
-
-to support churn prediction and customer retention strategies.
+The objective of this project is to build a machine learning model capable of predicting customers who are likely to churn based on customer demographics, account information, subscribed services, and payment behavior.
 
 ---
 
 # Dataset Information
 
-The dataset contains telecom customer information including:
-- demographic details,
-- account information,
-- subscribed services,
-- billing information,
-- and churn status.
+The dataset contains customer-related information such as:
+
+- Customer demographics
+- Contract type
+- Payment method
+- Internet services
+- Monthly charges
+- Customer tenure
+- Churn status
 
 ### Target Variable
-- `churn`
+
+- `Churn`
 
 ---
 
-# Exploratory Data Analysis (EDA)
+# Project Workflow
 
-The EDA phase focused on understanding customer behavior patterns, identifying churn drivers, and uncovering relationships between customer attributes and churn status.
+## 1. Data Cleaning & Preprocessing
 
----
+The following preprocessing steps were performed:
 
-# Univariate Analysis
-
-The following numerical features were analyzed:
-- tenure
-- monthlycharges
-- totalcharges
-
-### Major Findings
-- Most churned customers exhibit low tenure.
-- Higher monthly charges are associated with increased churn behavior.
-- Retained customers generally accumulate higher total charges over time.
-
-Categorical feature analysis also revealed important churn patterns across:
-- contract type,
-- internet service,
-- payment methods,
-- support services,
-- and security-related features.
+- Handled missing values
+- Converted categorical variables
+- Feature encoding using One-Hot Encoding
+- Feature scaling where necessary
+- Removed data inconsistencies
 
 ---
 
-# Bivariate and Multivariate Analysis
+## 2. Exploratory Data Analysis (EDA)
 
-Further analysis revealed several important churn patterns:
+EDA was conducted to understand:
 
-### Contract Type
-- Month-to-month customers exhibit the highest churn rates.
-- Long-term contract customers are generally more stable.
+- churn distribution
+- customer behavior patterns
+- relationships between variables and churn
+- important business trends
 
-### Internet Service
-- Fiber optic customers show higher churn compared to DSL users.
-- Some fiber customers remain subscribed for long periods before eventually churning.
+Several visualizations were created using:
 
-### Support and Protection Services
-Customers without:
-- tech support,
-- online security,
-- online backup,
-- or device protection
+- Matplotlib
+- Seaborn
 
-consistently exhibit higher churn behavior.
+### Key Findings
 
-### Payment Method
-- Electronic check users show significantly higher churn.
-- Automatic payment methods are associated with lower churn risk.
+- Customers with month-to-month contracts showed higher churn tendencies.
+- Customers with shorter tenure were more likely to churn.
+- Fiber optic internet users showed relatively higher churn behavior.
+- Customers using electronic check payment methods had higher churn tendencies.
+- Additional services such as online security and tech support improved customer retention.
 
 ---
 
-# Correlation Analysis
+## 3. Handling Imbalanced Data
 
-Phik correlation analysis was performed to measure relationships between both numerical and categorical variables.
+The dataset contained class imbalance in the target variable.
 
-### Features Most Associated with Churn
-- tenure
-- paymentmethod
-- monthlycharges
-- paperlessbilling
-- contract
-- techsupport
-- onlinesecurity
+To address this issue:
 
-### Features With Weak Relationship to Churn
-- gender
-- phoneservice
-
-The analysis indicates that customer churn is influenced by multiple behavioral, pricing, and service-related factors rather than a single variable.
+**SMOTE (Synthetic Minority Oversampling Technique)** was applied to balance the churn classes and improve model learning.
 
 ---
 
-# Feature Engineering & Preprocessing
+# Machine Learning Models Used
 
-The dataset was transformed into a machine-learning-ready format through several preprocessing steps:
+The following classification models were trained and evaluated:
 
-### Preprocessing Steps
-- Feature and target separation
-- Binary feature encoding
-- One-hot encoding of categorical variables
-- Train-test splitting using stratified sampling
-- Feature scaling using `RobustScaler`
-- Class imbalance handling using `SMOTE`
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- Gradient Boosting
+- AdaBoost
+- XGBoost
+- LightGBM
+- CatBoost
+- Support Vector Classifier (SVC)
+- K-Nearest Neighbors (KNN)
+- SGD Classifier
 
-### Additional Engineering Decisions
-- `customerid` was removed due to lack of predictive value.
-- Outlier analysis was performed without aggressive removal to preserve valid high-value customers.
-- Both baseline and SMOTE-balanced training datasets were retained for model comparison.
+Both:
 
-### Final Prepared Datasets
-- `X_train`
-- `X_test`
-- `y_train`
-- `y_test`
-- `X_train_smote`
-- `y_train_smote`
+- baseline models
+- SMOTE-enhanced models
+
+were compared.
 
 ---
 
-# Tools and Libraries Used
+# Model Evaluation Metrics
+
+The models were evaluated using:
+
+- Accuracy
+- Precision
+- Recall
+- F1-Score
+- ROC-AUC Score
+- Confusion Matrix
+- ROC Curve Analysis
+
+---
+
+# Hyperparameter Tuning
+
+RandomizedSearchCV was used for hyperparameter optimization on the top-performing models:
+
+- Gradient Boosting
+- AdaBoost
+- Logistic Regression
+- SVC
+
+The tuned and untuned models were compared to evaluate performance improvements.
+
+The untuned Gradient Boosting (SMOTE) model ultimately provided better overall balance and generalization performance.
+
+---
+
+# Final Model Selection
+
+After comparing all trained models, the:
+
+## Gradient Boosting (SMOTE)
+
+model was selected as the final model because it provided the best balance between:
+
+- Recall
+- Precision
+- F1-Score
+- ROC-AUC
+- Generalization Performance
+
+### Final Model Performance
+
+| Metric | Score |
+|---|---|
+| Accuracy | 0.7736 |
+| Precision | 0.5565 |
+| Recall | 0.7246 |
+| F1-Score | 0.6295 |
+| ROC-AUC | 0.8396 |
+
+---
+
+# Feature Importance Analysis
+
+Feature importance analysis revealed that the most influential factors affecting customer churn were:
+
+- Contract Type
+- Customer Tenure
+- Internet Service Type
+- Payment Method
+- Online Security
+- Tech Support
+- Monthly Charges
+
+The analysis showed that customers with short-term contracts and shorter tenure were more likely to churn.
+
+---
+
+# Key Business Insights
+
+- Customers on month-to-month contracts are more likely to churn.
+- Long-term contracts improve customer retention.
+- New customers have higher churn tendencies.
+- Fiber optic internet customers showed higher churn risk.
+- Customers using electronic check payment methods were more likely to churn.
+- Additional support services such as tech support and online security contributed positively to customer retention.
+
+---
+
+# Business Recommendations
+
+Based on the findings, the following recommendations are proposed:
+
+- Encourage customers to adopt long-term contracts.
+- Improve onboarding and engagement for new customers.
+- Investigate customer experience among fiber optic users.
+- Promote automated payment methods.
+- Expand value-added support services.
+
+---
+
+# Technologies Used
 
 - Python
 - Pandas
@@ -158,34 +224,62 @@ The dataset was transformed into a machine-learning-ready format through several
 - Seaborn
 - Scikit-learn
 - Imbalanced-learn (SMOTE)
-- Phik
-- Jupyter Notebook
+- XGBoost
+- LightGBM
+- CatBoost
+- Joblib
 
 ---
 
 # Project Structure
 
 ```bash
-Customer-churn-ML/
+Customer-Churn-ML/
 │
 ├── data/
-│   ├── raw/
-│   └── processed/
-│
 ├── notebooks/
-│   ├── EDA.ipynb
-│   └── Feature_Engineering.ipynb
-│
+├── models/
+├── visuals/
 ├── README.md
-├── metadata.md
-├── LICENSE
-└── .gitignore
+└── requirements.txt
+```
 
 ---
+
+# Model Saving
+
+The final trained model was saved using:
+
+```python
+joblib
+```
+
+Saved files:
+
+- customer_churn_gradient_boosting.pkl
+- model_features.pkl
+
+---
+
+# Future Improvements
+
+Possible future enhancements include:
+
+- Model deployment using Streamlit or Flask
+- SHAP explainability integration
+- Advanced feature engineering
+- Ensemble model stacking
+
+---
+
 # Conclusion
 
-The analysis identified several important drivers of customer churn, including customer tenure, pricing structure, contract type, billing behavior, and support-related services.
+This project successfully developed a machine learning solution capable of predicting customer churn with strong predictive performance.
 
-The preprocessing pipeline successfully transformed the dataset into a machine-learning-ready format while preserving important business information and addressing class imbalance challenges.
+The findings from this project can help businesses:
 
-These insights and engineered datasets provide a strong foundation for developing predictive machine learning models capable of identifying high-risk customers and supporting proactive retention strategies
+- identify high-risk customers
+- improve retention strategies
+- reduce customer loss
+- improve customer satisfaction
+- support data-driven decision-making
